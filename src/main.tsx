@@ -1,4 +1,4 @@
-import React, { StrictMode, Suspense, useEffect, useState } from "react";
+import { StrictMode, Suspense, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import AppContent from "@/App.tsx";
@@ -6,22 +6,15 @@ import { Toaster } from "@components/ui/toaster.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter } from "react-router";
+import ReactQueryDevtoolsProduction from "./components/react-query-dev-tools-production";
 
 const queryClient = new QueryClient();
 
-const ReactQueryDevtoolsProduction = React.lazy(() =>
-  import("@tanstack/react-query-devtools/build/modern/production.js").then(
-    (d) => ({
-      default: d.ReactQueryDevtools,
-    })
-  )
-);
-
-function App() {
+export function App() {
   const [showDevtools, setShowDevtools] = useState(false);
 
   useEffect(() => {
-    // @ts-expect-error
+    // @ts-expect-error ignore errors
     window.toggleDevtools = () => setShowDevtools((old) => !old);
   }, []);
 
