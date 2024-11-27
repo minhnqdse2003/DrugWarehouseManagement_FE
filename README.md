@@ -1,50 +1,146 @@
-# React + TypeScript + Vite
+- # Project Documentation: `drugwarehousemanagement-fe`
+- ## 1. Project Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  This repository contains the front-end application for Drug Warehouse Management. It is built using React, TypeScript, and a suite of modern development tools to ensure maintainability and efficiency.
 
-Currently, two official plugins are available:
+- ## 2. Project Structure
+- ### Key Scripts
+- **`dev`**: Starts the development server using Vite.
+- **`build`**: Compiles TypeScript code and builds the production-ready application.
+- **`lint`**: Runs ESLint to check for code quality issues.
+- **`preview`**: Launches the built application for previewing.
+- **`cypress`**: Opens the Cypress end-to-end testing tool.
+- ### Main Dependencies
+- **React**: The core UI library.
+- **TypeScript**: Superset of JavaScript for type safety.
+- **@tanstack/react-query**: For data fetching and state management.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Zod**: A TypeScript-first schema validation library.
+- **clsx**: Utility for conditionally joining class names.
+- **react-hook-form**: Library for handling form validations.
+- **lucide-react**: React components for Lucide icons.
+- **@radix-ui/react**: Components for building accessible UIs.
+- ### Development Dependencies
+- **ESLint**: Linting tool for maintaining code quality.
+- **Prettier**: Code formatter to ensure consistent style.
+- **Cypress**: End-to-end testing framework.
+- **Commitizen**: Tool for writing conventional commits.
+- **Vite**: Build tool for modern web development.
+- **Webpack**: Module bundler used internally for some tasks.
+- **Tailwind CSS plugins**: Used for animations and merging utility classes.
+- ## 3. Setup Instructions
+- ### Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  Ensure that you have the following installed:
 
-## Expanding the ESLint configuration
+- **Node.js** (v16 or higher recommended)
+- **npm** (v7 or higher)
+- ### Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+  Clone the repository and run the following commands:
 
-- Configure the top-level `parserOptions` property like this:
+  ```
+  git clone <repo-url>
+  cd drugwarehousemanagement-fe
+  npm install
+  ```
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+- ### Running the Development Server
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+  ```
+  npm run dev
+  ```
 
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
+- ### Building the Project
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
-```
+  ```
+  npm run build
+  ```
+
+- ### Previewing the Build
+
+  ```
+  bash
+
+  Copy code
+
+  npm run preview
+  ```
+
+- ### Linting the Code
+
+  ```
+  npm run lint
+  ```
+
+- ### Running Tests
+
+  ```
+  npm run cypress
+  ```
+
+- ## 4. Commitizen Integration
+- ### What is Commitizen?
+
+  Commitizen is a tool for writing consistent commit messages in a conventional format. This format helps to create a standardized changelog.
+
+- ### Setup
+
+  Commitizen has been configured to use `cz-conventional-changelog`. The configuration is set up in `package.json`:
+
+  ```
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+  ```
+
+- ### Usage
+
+  When you want to commit your changes, use the following command:
+
+  ```
+  npx git-cz
+  ```
+
+  or
+
+  ```
+  git commit
+  ```
+
+  This will trigger Commitizen to guide you through the commit process, asking for the type of change, a short description, and additional details as needed.
+
+- ## 5. Linting and Formatting
+- ### ESLint
+
+  ESLint helps maintain code quality and consistency. The ESLint configuration extends `plugin:storybook/recommended` for better integration with Storybook:
+
+  ```
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
+  }
+  ```
+
+- ### Prettier Integration
+
+  Prettier ensures code is formatted consistently. The `eslint-config-prettier` package is used to disable ESLint rules that might conflict with Prettier.
+
+- ## 6. Testing
+- ### Cypress
+
+  Cypress is configured for end-to-end testing. To run the tests, use:
+
+  ```
+  npm run cypress
+  ```
+
+- ## 7. Important Note for Developers
+- **Ensure you use `npx git-cz` for commits** to maintain a consistent commit format.
+- **Run `npm run lint` frequently** to check for any code quality issues.
+- **Check the `.gitignore` file** to ensure sensitive or unnecessary files are not committed to the repository.
+
+---
