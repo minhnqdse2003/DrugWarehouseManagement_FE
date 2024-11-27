@@ -40,7 +40,7 @@
   Clone the repository and run the following commands:
 
   ```
-  git clone <repo-url>
+  git clone https://github.com/minhnqdse2003/DrugWarehouseManagement_FE.git
   cd drugwarehousemanagement-fe
   npm install
   ```
@@ -60,10 +60,6 @@
 - ### Previewing the Build
 
   ```
-  bash
-
-  Copy code
-
   npm run preview
   ```
 
