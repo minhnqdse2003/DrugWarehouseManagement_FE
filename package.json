@@ -39,6 +39,7 @@
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.20",
     "cypress": "^13.16.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-cypress": "^4.1.0",
@@ -57,5 +58,10 @@
     "extends": [
       "plugin:storybook/recommended"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
