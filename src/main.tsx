@@ -6,8 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter } from "react-router";
 import ReactQueryDevtoolsProduction from "./components/react-query-dev-tools-production";
-import Layout from "./layout";
-import { LoginForm } from "@features/auth";
+import { AppRoutes } from "@routes/app-routes";
 
 const queryClient = new QueryClient();
 
@@ -22,9 +21,7 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Layout>
-          <LoginForm />
-        </Layout>
+        <AppRoutes />
       </BrowserRouter>
       <Toaster />
       <ReactQueryDevtools initialIsOpen />
