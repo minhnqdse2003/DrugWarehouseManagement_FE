@@ -1,12 +1,13 @@
 import { StrictMode, Suspense, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import AppContent from "@/App.tsx";
 import { Toaster } from "@components/ui/toaster.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter } from "react-router";
 import ReactQueryDevtoolsProduction from "./components/react-query-dev-tools-production";
+import Layout from "./layout";
+import { LoginForm } from "@features/auth";
 
 const queryClient = new QueryClient();
 
@@ -21,7 +22,9 @@ export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <AppContent />
+        <Layout>
+          <LoginForm />
+        </Layout>
       </BrowserRouter>
       <Toaster />
       <ReactQueryDevtools initialIsOpen />
