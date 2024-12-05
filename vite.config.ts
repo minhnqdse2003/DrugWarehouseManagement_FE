@@ -2,21 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path';
 
-
-let port: number;
-
-if (process.env.NODE_ENV === 'production') {
-  port = process.env.VITE_PRODUCTION_PORT
-    ? parseInt(process.env.VITE_PRODUCTION_PORT, 10)
-    : 3000;
-} else {
-  port = process.env.VITE_PORT
-    ? parseInt(process.env.VITE_PORT, 10)
-    : 3000;
-}
-
 // https://vite.dev/config/
 export default defineConfig({
+  base:"/",
   plugins: [react()],
   resolve: {
     alias: {
@@ -38,7 +26,14 @@ export default defineConfig({
       '@tests': path.resolve(__dirname, 'src/tests')
     }
   },
-  server: {
-    port
-  },
+  preview: {
+    port: 8080,
+    strictPort: true,
+   },
+   server: {
+    port: 8080,
+    strictPort: true,
+    host: true,
+    origin: "http://0.0.0.0:8080",
+   },
 })
