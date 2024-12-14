@@ -1,3 +1,3 @@
 export const SignUpForm = () => {
-  return <div>Sign Up Form Page Test</div>;
-};
+  return <div>Sign Up Form Page Test</div>
+}

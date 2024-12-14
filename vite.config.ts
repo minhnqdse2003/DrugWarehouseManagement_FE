@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import path from 'path';
+import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base:"/",
+  base: '/',
   plugins: [react()],
   resolve: {
     alias: {
@@ -23,17 +23,17 @@ export default defineConfig({
       '@constants': path.resolve(__dirname, 'src/constants'),
       '@store': path.resolve(__dirname, 'src/store'),
       '@routes': path.resolve(__dirname, 'src/routes'),
-      '@tests': path.resolve(__dirname, 'src/tests')
-    }
+      '@tests': path.resolve(__dirname, 'src/tests'),
+    },
   },
   preview: {
     port: 8080,
     strictPort: true,
-   },
-   server: {
+  },
+  server: {
     port: 8080,
     strictPort: true,
     host: true,
-    origin: "http://0.0.0.0:8080",
-   },
+    origin: 'http://0.0.0.0:8080',
+  },
 })
