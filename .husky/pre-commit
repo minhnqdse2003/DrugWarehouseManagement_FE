@@ -1,1 +1,1 @@
-npx lint-staged -r -p false
+npx lint-staged -r -p false && npm run format
