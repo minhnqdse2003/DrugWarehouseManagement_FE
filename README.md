@@ -140,3 +140,18 @@
 - **Check the `.gitignore` file** to ensure sensitive or unnecessary files are not committed to the repository.
 
 ---
+
+## 8. Husky & Storybook
+
+### Husky
+
+Husky improves the commit workflow by running pre-commit checks, helping maintain code quality and preventing accidental commits of broken code or incorrect formatting. It's configured in the `prepare` script.
+
+### Storybook
+
+Storybook allows developing UI components in isolation, enabling creation and testing independent of the main application. This ensures components function correctly and are visually consistent.  Run Storybook with:
+
+```
+npm run storybook # Start Storybook
+npm run build-storybook # Build a static version
+```
