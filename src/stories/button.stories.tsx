@@ -5,7 +5,7 @@ import { Loader2, Mail } from 'lucide-react'
 import { action } from '@storybook/addon-actions'
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Button', // Updated title for better organization in Storybook
+  title: 'Components/Button',
   component: Button,
   parameters: {
     layout: 'centered',
@@ -24,7 +24,7 @@ const meta: Meta<typeof Button> = {
       ],
       description: 'Visual style of the button.',
       table: {
-        defaultValue: { summary: 'default' }, // Explicitly state default value in the table
+        defaultValue: { summary: 'default' },
       },
     },
     size: {
@@ -32,22 +32,22 @@ const meta: Meta<typeof Button> = {
       options: ['default', 'sm', 'lg', 'icon'],
       description: 'Size of the button.',
       table: {
-        defaultValue: { summary: 'default' }, // Explicitly state default value in the table
+        defaultValue: { summary: 'default' },
       },
     },
     children: {
       control: 'text',
-      description: 'Button label or content (text or other React components).', // More descriptive
+      description: 'Button label or content (text or other React components).',
       table: {
-        type: { summary: 'ReactNode' }, // Show that children can be more than text
+        type: { summary: 'ReactNode' },
       },
     },
     onClick: {
-      action: 'clicked', // Use action addon for click events
+      action: 'clicked',
       description: 'Callback function triggered when the button is clicked.',
       table: {
-        type: { summary: '() => void' }, // Clearly indicates a function type
-        category: 'Events', // Group onClick in an "Events" category in the ArgsTable
+        type: { summary: '() => void' },
+        category: 'Events',
       },
     },
     disabled: {

@@ -8,6 +8,10 @@ const config: StorybookConfig = {
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
     '@storybook/addon-styling-webpack',
+    '@storybook/addon-actions',
+    '@storybook/addon-links',
+    '@storybook/addon-docs',
+    '@storybook/addon-controls',
   ],
   framework: {
     name: '@storybook/react-vite',

@@ -25,10 +25,15 @@ export default {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
+          dark: '#1565C0',
+          light: '#689FFF',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))',
+          green: '#4CAF50',
+          greenLight: '#81C784',
+          teal: '#00BCD4',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
@@ -37,11 +42,21 @@ export default {
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
+          orange: '#FF9800',
+          yellow: '#FFEB3B',
+          purple: '#9C27B0',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
+        neutral: {
+          light: '#F5F5F5', // Use with `bg-neutral-light`
+          mid: '#E0E0E0', // Use with `bg-neutral-mid`
+          dark: '#424242', // Use with `bg-neutral-dark`
+          white: '#fff', // Use with `bg-neutral-white`
+        },
+        error: '#F44336', // Use with `bg-error`
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
