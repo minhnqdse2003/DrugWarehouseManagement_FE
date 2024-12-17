@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Meta, StoryObj } from '@storybook/react'
 import { useEffect, useState } from 'react'
 import {
@@ -21,6 +23,9 @@ import {
 } from '@/components/ui/table'
 import { DataTableColumnHeader } from '@/components/columns-header'
 import { Input } from '@/components/ui/input'
+import { Product, Products } from './types/Products'
+import useTable from '@/hooks/use-table'
+import { DataTablePagination } from '@/components/pagination'
 
 type Payment = {
   id: string
@@ -105,9 +110,8 @@ type Story = StoryObj<typeof Table>
 
 export const Default: Story = {
   render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [data, setData] = useState<Payment[]>([])
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+
     useEffect(() => {
       getData().then(setData)
     }, [])
@@ -127,7 +131,6 @@ export const Default: Story = {
       },
     ]
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const table = useReactTable({
       data,
       columns,
@@ -191,14 +194,11 @@ export const Default: Story = {
 
 export const CellFormating: Story = {
   render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [data, setData] = useState<Payment[]>([])
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
       getData().then(setData)
     }, [])
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [sorting, setSorting] = useState<SortingState>([]) /*Use for format */
 
     const columns: ColumnDef<Payment>[] = [
@@ -227,7 +227,6 @@ export const CellFormating: Story = {
       },
     ]
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const table = useReactTable({
       data,
       columns,
@@ -296,18 +295,13 @@ export const CellFormating: Story = {
 
 export const Filters: Story = {
   render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [data, setData] = useState<Payment[]>([])
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [sorting, setSorting] = useState<SortingState>([])
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
     useEffect(() => {
       getData().then(setData)
     }, [])
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [sorting, setSorting] = useState<SortingState>([])
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
     const columns: ColumnDef<Payment>[] = [
       {
@@ -335,7 +329,6 @@ export const Filters: Story = {
       },
     ]
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const table = useReactTable({
       data,
       columns,
@@ -410,6 +403,160 @@ export const Filters: Story = {
             </TableBody>
           </Table>
         </div>
+      </div>
+    )
+  },
+}
+
+export const FetchDataAndPaging: Story = {
+  render: () => {
+    const [filters, setLocalFiltersState] = useState<Filters>({})
+    const [pageSize] = useState(10)
+
+    const columns: ColumnDef<Product>[] = [
+      {
+        accessorKey: 'id',
+        header: 'ID',
+      },
+      {
+        accessorKey: 'title',
+        header: 'Title',
+      },
+      {
+        accessorKey: 'category',
+        header: 'Category',
+      },
+      {
+        accessorKey: 'price',
+        header: 'Price',
+      },
+      {
+        accessorKey: 'stock',
+        header: 'Stock',
+      },
+
+      {
+        accessorKey: 'rating',
+        header: 'Rating',
+      },
+    ]
+
+    interface Filters {
+      title?: string
+      category?: string
+      price?: string
+      stock?: number
+      rating?: number
+    }
+
+    const fetchData = async (filtersProps: {
+      pageIndex: number
+      pageSize: number
+      sorting?: any
+      filters?: Filters
+    }) => {
+      const skip = filtersProps.pageIndex * filtersProps.pageSize
+      let isQueryAble = false
+      let url = `https://dummyjson.com/products`
+
+      if (filtersProps.filters?.title) {
+        url += `/search?q=${filtersProps.filters.title}`
+        isQueryAble = true
+      }
+
+      url += isQueryAble
+        ? `&limit=${filtersProps.pageSize}&skip=${skip}`
+        : `?limit=${filtersProps.pageSize}&skip=${skip}`
+
+      const response = await fetch(url)
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`)
+      }
+      const data: Products = await response.json()
+
+      return {
+        data: data.products,
+        total: data.total,
+      }
+    }
+
+    const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value
+      setLocalFiltersState({ ...filters, title: value })
+      setLocalFilters({ ...filters, title: value })
+    }
+
+    const { table, setLocalFilters } = useTable<Product, Filters>({
+      fetchData,
+      columns,
+      initialPageSize: pageSize,
+      initialFilters: filters,
+    })
+
+    return (
+      <div className='container mx-auto py-10'>
+        <div className='flex items-center py-4'>
+          <Input
+            placeholder='Filter By Title...'
+            value={filters.title ?? ''}
+            onChange={handleFilterChange}
+            className='max-w-sm'
+          />
+        </div>
+        <div className='rounded-md border'>
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map(headerGroup => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map(header => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                      </TableHead>
+                    )
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map(row => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && 'selected'}>
+                    {row.getVisibleCells().map(cell => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className='h-24 text-center'>
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+        <DataTablePagination
+          table={table}
+          pageSizes={[5, 10, 25, 50, 100]}
+          showSelectedRowsCount={true}
+        />
       </div>
     )
   },
