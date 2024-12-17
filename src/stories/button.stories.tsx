@@ -171,5 +171,6 @@ export const LoadingContent: Story = {
         Login with Email
       </>
     ),
+    className: 'bg-error text-white hover:text-black',
   },
 }
