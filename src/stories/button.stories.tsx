@@ -85,7 +85,6 @@ export const Primary: Story = {
 export const Destructive: Story = {
   args: {
     variant: 'destructive',
-    size: 'default',
     children: 'Destructive Button',
   },
 }
